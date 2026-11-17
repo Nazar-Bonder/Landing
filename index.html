@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <script src="assets/js/validation.js" defer></script>
   
   
 </head>
@@ -42,7 +43,7 @@
     <section class="hero-section hero-bg">
       <div class="hero-container-left">
         <div class="hero-text-block">
-          <span class="badge">Сервісний центр Chip & Byte {11.11.2026 Зміна}</span>
+          <span class="badge">Сервісний центр Chip & Byte</span>
           <h1 class="hero-title">Професійний ремонт техніки з гарантією 12 місяців</h1>
           <p class="hero-desc">
             Від діагностики до складної пайки. Прозора ціна, відстеження статусів та ремонт без сюрпризів.
@@ -139,90 +140,170 @@
       </div>
     </section>
 
-    <!-- Калькулятор-заявка (Netlify Form) -->
-    <section class="calculator-section" id="calculator">
-      <div class="calculator-container">
-        <div class="calc-header">
-          <span class="badge">Онлайн заявка</span>
-          <h2 class="section-title">Розрахунок та оформлення</h2>
-          <p class="section-desc">Оберіть проблеми вашого пристрою. Ми розрахуємо орієнтовну вартість робіт.</p>
+      <!-- Форма запису на діагностику йоу -->
+      <section id="booking" aria-labelledby="booking-heading">
+    <div class="container">
+      <header>
+        <h2 id="booking-heading">Записатись на діагностику</h2>
+        <p>Не знаєте точну причину несправності? Залиште заявку — майстер «Чіп &amp; Байт» проведе діагностику та зв’яжеться з вами.</p>
+      </header>
+
+      <form id="diagnosticForm" name="diagnosticForm" novalidate>
+        <!-- 1. Ім'я та прізвище -->
+        <div class="form-group">
+          <label for="username">Ім'я та прізвище *</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Наприклад: Назар Бондар"
+            autocomplete="name"
+            aria-describedby="usernameError"
+            aria-invalid="false"
+            required
+          >
+          <p id="usernameError" class="error-message" role="alert" hidden></p>
         </div>
 
-        <form class="lead-form" name="repair-request" method="POST" data-netlify="true">
-          <!-- Невидиме поле для Netlify -->
-          <input type="hidden" name="form-name" value="repair-request">
-          
-          <div class="problem-grid" id="problemGrid">
-            <!-- Квадратні кнопки-чекбокси -->
-            <label class="problem-toggle">
-              <input type="checkbox" name="problems[]" value="Батарея" data-price="800" class="visually-hidden">
-              <span class="toggle-content">
-                <i class="fa-solid fa-battery-quarter"></i>
-                <span class="problem-name">Заміна акумулятора</span>
-                <span class="problem-price">від 800 ₴</span>
-              </span>
-            </label>
+        <!-- 2. Номер телефону -->
+        <div class="form-group">
+          <label for="phone">Номер телефону *</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="+380XXXXXXXXX"
+            autocomplete="tel"
+            aria-describedby="phoneError"
+            aria-invalid="false"
+            required
+          >
+          <p id="phoneError" class="error-message" role="alert" hidden></p>
+        </div>
 
-            <label class="problem-toggle">
-              <input type="checkbox" name="problems[]" value="Екран" data-price="1200" class="visually-hidden">
-              <span class="toggle-content">
-                <i class="fa-solid fa-display"></i>
-                <span class="problem-name">Заміна екрана</span>
-                <span class="problem-price">від 1200 ₴</span>
-              </span>
-            </label>
+        <!-- 3. Електронна пошта -->
+        <div class="form-group">
+          <label for="email">Електронна пошта *</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="user@example.com"
+            autocomplete="email"
+            aria-describedby="emailError"
+            aria-invalid="false"
+            required
+          >
+          <p id="emailError" class="error-message" role="alert" hidden></p>
+        </div>
 
-            <label class="problem-toggle">
-              <input type="checkbox" name="problems[]" value="Чистка" data-price="500" class="visually-hidden">
-              <span class="toggle-content">
-                <i class="fa-solid fa-fan"></i>
-                <span class="problem-name">Чистка та термопаста</span>
-                <span class="problem-price">від 500 ₴</span>
-              </span>
-            </label>
+        <!-- 4. Бренд та модель пристрою -->
+        <div class="form-group">
+          <label for="deviceModel">Бренд та модель пристрою *</label>
+          <input
+            type="text"
+            id="deviceModel"
+            name="deviceModel"
+            placeholder="Наприклад: Acer Nitro 5 або ASUS ROG"
+            aria-describedby="deviceModelError"
+            aria-invalid="false"
+            required
+          >
+          <p id="deviceModelError" class="error-message" role="alert" hidden></p>
+        </div>
 
-            <label class="problem-toggle">
-              <input type="checkbox" name="problems[]" value="Віндовс" data-price="400" class="visually-hidden">
-              <span class="toggle-content">
-                <i class="fa-brands fa-windows"></i>
-                <span class="problem-name">Встановлення ОС</span>
-                <span class="problem-price">від 400 ₴</span>
-              </span>
-            </label>
-          </div>
+        <!-- 5. Тип пристрою (група радіокнопок) -->
+        <fieldset class="form-group form-group--full" aria-describedby="deviceTypeError">
+          <legend>Тип пристрою *</legend>
 
-          <!-- Блок "Інше" -->
-          <div class="other-problem-block">
-            <label class="problem-toggle full-width">
-              <input type="checkbox" id="otherToggle" class="visually-hidden">
-              <span class="toggle-content">
-                <i class="fa-solid fa-circle-question"></i>
-                <span class="problem-name">Інше / Не впевнений</span>
-                <span class="problem-price">Після діагностики</span>
-              </span>
-            </label>
-            <div class="other-textarea-wrapper" id="otherTextarea">
-              <textarea name="other_details" class="form-input" rows="3" maxlength="300" placeholder="Опишіть симптоми"></textarea>
+          <div class="radio-group">
+            <div class="radio-item">
+              <input type="radio" id="device-laptop" name="deviceType" value="laptop" required>
+              <label for="device-laptop">Ноутбук</label>
+            </div>
+
+            <div class="radio-item">
+              <input type="radio" id="device-pc" name="deviceType" value="pc">
+              <label for="device-pc">Стаціонарний ПК</label>
+            </div>
+
+            <div class="radio-item">
+              <input type="radio" id="device-monitor" name="deviceType" value="monitor">
+              <label for="device-monitor">Монітор</label>
+            </div>
+
+            <div class="radio-item">
+              <input type="radio" id="device-mobile" name="deviceType" value="mobile">
+              <label for="device-mobile">Телефон / Планшет</label>
+            </div>
+
+            <div class="radio-item">
+              <input type="radio" id="device-other" name="deviceType" value="other">
+              <label for="device-other">Інше</label>
             </div>
           </div>
 
-          <!-- Результат та Контакти -->
-          <div class="form-footer">
-            <div class="price-result">
-              <span>Орієнтовна вартість робіт:</span>
-              <strong id="totalPrice">0 ₴</strong>
-              <small class="form-hint">+ вартість запчастин</small>
-            </div>
-            
-            <div class="contact-inputs">
-              <input type="text" name="name" class="form-input" placeholder="Ваше ім'я" required>
-              <input type="tel" name="phone" class="form-input" placeholder="+380" required>
-              <button type="submit" class="btn btn-primary w-full">Записатись на ремонт</button>
-            </div>
+          <p id="deviceTypeError" class="error-message" role="alert" hidden></p>
+        </fieldset>
+
+        <!-- 6. Опис поломки або симптомів -->
+        <div class="form-group form-group--full">
+          <label for="message">Опис поломки або симптомів *</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            placeholder="Опишіть, що саме трапилося з пристроєм (наприклад: не вмикається після пролиття рідини, сильно гріється тощо)..."
+            aria-describedby="messageError"
+            aria-invalid="false"
+            required
+          ></textarea>
+          <p id="messageError" class="error-message" role="alert" hidden></p>
+        </div>
+
+        <!-- 7. Згода на обробку персональних даних -->
+        <div class="form-group form-group--full">
+          <div class="checkbox-item">
+            <input
+              type="checkbox"
+              id="agreement"
+              name="agreement"
+              aria-describedby="agreementError"
+              aria-invalid="false"
+              required
+            >
+            <label for="agreement">
+              Я погоджуюсь на обробку персональних даних відповідно до політики конфіденційності *
+            </label>
           </div>
-        </form>
-      </div>
-    </section>
+          <p id="agreementError" class="error-message" role="alert" hidden></p>
+        </div>
+
+        <!-- Кнопка відправки -->
+        <div class="form-actions form-group--full">
+          <button type="submit" id="submitBtn">Записатись на діагностику</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Модальне вікно успішної валідації (Етап 11) -->
+  <div
+    id="successModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle"
+    aria-describedby="modalDescription"
+    hidden
+  >
+    <div class="modal-content">
+      <h3 id="modalTitle">Заявку прийнято!</h3>
+      <p id="modalDescription">
+        Форма успішно пройшла клієнтську валідацію. Демонстрація успішного надсилання заявки до сервісного центру «Чіп &amp; Байт».
+      </p>
+      <button type="button" id="closeModalBtn">Закрити</button>
+    </div>
+  </div>
 
   </main>
 

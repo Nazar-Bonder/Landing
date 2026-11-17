@@ -931,3 +931,403 @@ input#otherToggle:checked ~ .other-textarea-wrapper textarea.form-input:focus {
   .toggle-content i { margin-right: var(--space-2); }
   .problem-price { margin-left: auto; }
 }
+
+
+/* ==========================================================================
+   Секція запису на діагностику (#booking) — на базі :root токенів «Чіп & Байт»
+   ========================================================================== */
+#booking {
+  padding: var(--space-16) 0;
+  background-color: var(--color-bg-default);
+  color: var(--color-text-primary);
+  font-family: var(--font-primary);
+}
+
+#booking .container {
+  max-width: var(--container-md);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+#booking header {
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+#booking-heading {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-h2);
+  letter-spacing: var(--letter-spacing-h2);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-3);
+}
+
+#booking header p {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text-secondary);
+  max-width: var(--container-sm);
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   Картка форми та адаптивна сітка (Mobile-first)
+   ========================================================================== */
+#diagnosticForm {
+  background-color: var(--color-surface-default);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: grid;
+  grid-template-columns: 1fr; /* Мобільний: 1 колонка */
+  gap: var(--space-4);
+  box-shadow: var(--shadow-md);
+}
+
+@media (min-width: 768px) {
+  #diagnosticForm {
+    padding: var(--space-8);
+    grid-template-columns: repeat(2, 1fr); /* Планшет / Десктоп: 2 колонки */
+    gap: var(--space-6);
+  }
+
+  .form-group--full {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ==========================================================================
+   Поля вводу та стани (Normal / Focus / Error / Success)
+   ========================================================================== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.form-group > label,
+.form-group > legend {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-small);
+  color: var(--color-text-primary);
+  padding: 0;
+}
+
+/* 1. Normal */
+#diagnosticForm input[type="text"],
+#diagnosticForm input[type="tel"],
+#diagnosticForm input[type="email"],
+#diagnosticForm textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface-card);
+  border: 2.5px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  outline: none;
+  box-shadow: var(--shadow-xs);
+  transition: border-color var(--transition-fast),
+              background-color var(--transition-fast),
+              box-shadow var(--transition-fast);
+}
+
+#diagnosticForm textarea {
+  min-height: 112px;
+  resize: vertical;
+  overflow: hidden;
+  resize: none;
+}
+
+#diagnosticForm input::placeholder,
+#diagnosticForm textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+#diagnosticForm input:hover,
+#diagnosticForm textarea:hover {
+  border-color: var(--color-text-muted);
+}
+
+/* 2. Focus */
+#diagnosticForm input:focus-visible,
+#diagnosticForm textarea:focus-visible {
+  background-color: var(--color-surface-default);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-surface-mint);
+}
+
+/* 3. Error (додається JS клас .is-invalid) */
+#diagnosticForm input.is-invalid,
+#diagnosticForm textarea.is-invalid {
+  background-color: var(--color-surface-default);
+  border-color: var(--color-feedback-error);
+}
+
+#diagnosticForm input.is-invalid:focus-visible,
+#diagnosticForm textarea.is-invalid:focus-visible {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.18);
+}
+
+/* 4. Success (додається JS клас .is-valid) */
+#diagnosticForm input.is-valid {
+  padding-right: 42px;
+  background-color: var(--color-surface-default);
+  border-color: var(--color-feedback-success);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2310B981'%3E%3Cpath fill-rule='evenodd' d='M16.704 5.29a1 1 0 010 1.42l-7.5 7.5a1 1 0 01-1.414 0l-3.5-3.5a1 1 0 111.414-1.42L8.5 12.086l6.79-6.796a1 1 0 011.414 0z' clip-rule='evenodd'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 20px 20px;
+}
+
+#diagnosticForm input.is-valid:focus-visible,
+
+#diagnosticForm textarea.is-valid {
+  padding-right: 42px;
+  background-color: var(--color-surface-default);
+  border-color: var(--color-feedback-success);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2310B981'%3E%3Cpath fill-rule='evenodd' d='M16.704 5.29a1 1 0 010 1.42l-7.5 7.5a1 1 0 01-1.414 0l-3.5-3.5a1 1 0 111.414-1.42L8.5 12.086l6.79-6.796a1 1 0 011.414 0z' clip-rule='evenodd'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px top 14px;
+  background-size: 20px 20px;
+}
+
+#diagnosticForm textarea.is-valid:focus-visible {
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+  min-height: 112px;
+  overflow: hidden;
+  resize: none;
+}
+
+/* Текст помилки під полем */
+.error-message {
+  margin: 0;
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-caption);
+  color: var(--color-feedback-error);
+}
+
+.error-message[hidden] {
+  display: none;
+}
+
+/* ==========================================================================
+   Група радіокнопок (Тип пристрою) у фірмовій м'ятно-смарагдовій палітрі
+   ========================================================================== */
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.radio-item {
+  position: relative;
+}
+
+.radio-item input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+}
+
+.radio-item label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  background-color: var(--color-surface-card);
+  border: 1.5px solid var(--color-border-subtle);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--transition-fast);
+}
+
+.radio-item label:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-surface-highlight);
+}
+
+.radio-item input[type="radio"]:checked + label {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+  background-color: var(--color-surface-mint);
+  border-color: var(--color-primary);
+}
+
+.radio-item input[type="radio"]:focus-visible + label {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Чекбокс згоди та Primary CTA кнопка
+   ========================================================================== */
+.checkbox-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  cursor: pointer;
+}
+
+.checkbox-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  margin-top: 2px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.checkbox-item input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.checkbox-item label {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.form-actions {
+  margin-top: var(--space-2);
+}
+
+#submitBtn {
+  width: 100%;
+  min-height: 48px;
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-on-primary);
+  background-color: var(--color-primary);
+  border: 1.5px solid var(--color-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-fast),
+              color var(--transition-fast),
+              border-color var(--transition-fast),
+              box-shadow var(--transition-fast),
+              transform var(--transition-fast);
+}
+
+#submitBtn:hover {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  box-shadow: var(--shadow-md);
+}
+
+#submitBtn:active {
+  transform: translateY(1px);
+}
+
+/* Пасивний вигляд кнопки, поки не всі поля заповнені коректно */
+#submitBtn.is-passive {
+  background-color: var(--color-surface-highlight);
+  color: var(--color-text-secondary);
+  border-color: var(--color-border-subtle);
+  box-shadow: none;
+}
+
+#submitBtn.is-passive:hover {
+  background-color: #CBD5E1;
+  color: var(--color-text-primary);
+  border-color: var(--color-text-muted);
+}
+
+@media (min-width: 768px) {
+  #submitBtn {
+    width: auto;
+    min-width: 260px;
+  }
+}
+
+/* ==========================================================================
+   Модальне вікно успішного надсилання (Етап 11)
+   ========================================================================== */
+#successModal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  background-color: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+}
+
+#successModal[hidden] {
+  display: none;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 440px;
+  background-color: var(--color-surface-default);
+  border: 1px solid var(--color-border-mint);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+
+#modalTitle {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-h3);
+  color: var(--color-primary);
+  margin: 0 0 var(--space-3);
+}
+
+#modalDescription {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--space-6);
+}
+
+#closeModalBtn {
+  min-height: 44px;
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-on-primary);
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+#closeModalBtn:hover {
+  background-color: var(--color-primary-hover);
+}
+
+#closeModalBtn:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
