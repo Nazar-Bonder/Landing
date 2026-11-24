@@ -5,15 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chip & Byte — Сервісний центр (Лендинг)</title>
   
+  <!-- Базові стилі проєкту -->
   <link rel="stylesheet" href="css/style.css">
 
+  <!-- Шрифти та іконки -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+  <!-- CDN Стилі плагінів (Swiper та Fancybox) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css">
+
+  <!-- Власні стилі для плагінів -->
+  <link rel="stylesheet" href="css/plugins.css">
+
+  <!-- Власна валідація форми -->
   <script src="assets/js/validation.js" defer></script>
-  
-  
+
+  <!-- CDN Скрипти плагінів (Typed.js, Swiper.js, Fancybox) -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js" defer></script>
+
+  <!-- Ініціалізація плагінів -->
+  <script src="assets/js/plugins.js" defer></script>
 </head>
 <body>
 
@@ -24,9 +41,10 @@
         <img src="assets/icons/logo.svg" alt="" class="logo-icon" aria-hidden="true">
         <span class="logo-text">Chip & Byte</span>
       </a>
-      <nav class="nav-menu" aria-label="Зміна головної навігації Головна навігація">
+      <nav class="nav-menu" aria-label="Головна навігація">
         <a href="#services">Послуги</a>
         <a href="#about">Про нас</a>
+        <a href="#cases">Наші роботи</a>
         <a href="#testimonials">Відгуки</a>
       </nav>
       <div class="header-action">
@@ -39,12 +57,15 @@
 
   <main class="main-content">
     
-    <!-- Hero Секція (Фон без прозорості, текст зліва) -->
+    <!-- Hero Секція -->
     <section class="hero-section hero-bg">
       <div class="hero-container-left">
         <div class="hero-text-block">
           <span class="badge">Сервісний центр Chip & Byte</span>
-          <h1 class="hero-title">Професійний ремонт техніки з гарантією 12 місяців</h1>
+          <!-- Typed.js працює всередині span#typed-device -->
+          <h1 class="hero-title">
+            Професійний ремонт <span id="typed-device" class="typed-accent"></span> з гарантією 12 місяців
+          </h1>
           <p class="hero-desc">
             Від діагностики до складної пайки. Прозора ціна, відстеження статусів та ремонт без сюрпризів.
           </p>
@@ -68,7 +89,6 @@
         <h2 class="section-title">Наші послуги</h2>
         <p class="section-desc">Оберіть потрібну послугу. Вартість та терміни — без зайвих питань.</p>
         <div class="services-grid">
-          <!-- Картки послуг зі збереженням твого стилю -->
           <article class="service-card">
             <h3 class="card-title">Діагностика та аналіз</h3>
             <p class="card-desc">Повний апаратний огляд вузлів комп'ютера.</p>
@@ -100,7 +120,6 @@
           <p class="section-desc">Подивіться за лаштунки нашого сервісу. Ми використовуємо сучасне обладнання та дотримуємося антистатичних стандартів.</p>
         </div>
         <div class="video-wrapper">
-          <!-- Ліниве завантаження iframe для продуктивності -->
           <iframe 
             width="560" 
             height="315" 
@@ -116,194 +135,311 @@
       </div>
     </section>
 
-    <!-- Відгуки -->
-    <section class="testimonials-section" id="testimonials">
-      <div class="testimonials-container">
-        <h2 class="section-title text-center">Що кажуть клієнти</h2>
-        <div class="testimonials-grid">
-          <article class="testimonial-card">
-            <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-            <p class="testimonial-text">"Відновили залитий макбук, хоча в іншому сервісі сказали міняти плату. Дуже дякую!"</p>
-            <strong class="testimonial-author">Олексій М.</strong>
+    <!-- НОВА СЕКЦІЯ: Наші роботи (Fancybox Галерея) -->
+    <section class="cases-section" id="cases">
+      <div class="cases-container">
+        <span class="badge">Реальні кейси майстерні</span>
+        <h2 class="section-title">Виконані ремонти</h2>
+        <p class="section-desc">Натисніть на фото, щоб переглянути деталі ремонту у повному розмірі.</p>
+
+        <div class="cases-grid">
+          <!-- Кейс 1 -->
+          <article class="case-card">
+            <a 
+              href="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1200&q=80" 
+              data-fancybox="repair-gallery" 
+              data-caption="<strong>ASUS ROG Strix G15:</strong> Відновлення ланцюгів живлення після залиття та ультразвукова чистка плати. Вартість: 2 400 грн."
+              class="case-image-link"
+            >
+              <img 
+                src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=600&q=80" 
+                alt="Ремонт материнської плати ноутбука ASUS ROG"
+                loading="lazy"
+              >
+              <span class="case-zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i> Збільшити</span>
+            </a>
+            <div class="case-info">
+              <h3 class="card-title">Відновлення плати ASUS ROG</h3>
+              <p class="card-desc">Усунення короткого замикання та заміна ШІМ-контролера.</p>
+              <span class="badge-tag">2 400 грн • 2 дні</span>
+            </div>
           </article>
-          <article class="testimonial-card">
-            <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-            <p class="testimonial-text">"Сподобався прозорий розрахунок. Ціна не змінилась після ремонту."</p>
-            <strong class="testimonial-author">Ірина В.</strong>
+
+          <!-- Кейс 2 -->
+          <article class="case-card">
+            <a 
+              href="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=1200&q=80" 
+              data-fancybox="repair-gallery" 
+              data-caption="<strong>Кастомна збірка та обслуговування ПК:</strong> Заміна термоінтерфейсу на Honeywell PTM7950 та кабель-менеджмент. Вартість: 950 грн."
+              class="case-image-link"
+            >
+              <img 
+                src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=600&q=80" 
+                alt="Обслуговування системи охолодження ПК"
+                loading="lazy"
+              >
+              <span class="case-zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i> Збільшити</span>
+            </a>
+            <div class="case-info">
+              <h3 class="card-title">Чистка та заміна термоінтерфейсу</h3>
+              <p class="card-desc">Зниження температур процесора та відеокарти під навантаженням на 18°C.</p>
+              <span class="badge-tag">950 грн • 1 день</span>
+            </div>
           </article>
-          <article class="testimonial-card">
-            <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
-            <p class="testimonial-text">"Зробили швидко, але довелось почекати деталь з Європи. Проте сервіс на висоті."</p>
-            <strong class="testimonial-author">Максим С.</strong>
+
+          <!-- Кейс 3 -->
+          <article class="case-card">
+            <a 
+              href="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80" 
+              data-fancybox="repair-gallery" 
+              data-caption="<strong>BGA-пайка відеочіпа:</strong> Реболінг та заміна чіпа пам'яті GDDR6 на інфрачервоній паяльній станції. Вартість: 3 100 грн."
+              class="case-image-link"
+            >
+              <img 
+                src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" 
+                alt="Мікросхема на друкованій платі"
+                loading="lazy"
+              >
+              <span class="case-zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i> Збільшити</span>
+            </a>
+            <div class="case-info">
+              <h3 class="card-title">Заміна чіпів відеопам'яті</h3>
+              <p class="card-desc">Пайка на ІЧ-станції з подальшим стрес-тестуванням у FurMark та OCCT.</p>
+              <span class="badge-tag">3 100 грн • 3 дні</span>
+            </div>
           </article>
         </div>
       </div>
     </section>
 
-      <!-- Форма запису на діагностику йоу -->
-      <section id="booking" aria-labelledby="booking-heading">
-    <div class="container">
-      <header>
-        <h2 id="booking-heading">Записатись на діагностику</h2>
-        <p>Не знаєте точну причину несправності? Залиште заявку — майстер «Чіп &amp; Байт» проведе діагностику та зв’яжеться з вами.</p>
-      </header>
+    <!-- Відгуки (Swiper.js Слайдер) -->
+    <section class="testimonials-section" id="testimonials">
+      <div class="testimonials-container">
+        <h2 class="section-title text-center">Що кажуть клієнти</h2>
 
-      <form id="diagnosticForm" name="diagnosticForm" novalidate>
-        <!-- 1. Ім'я та прізвище -->
-        <div class="form-group">
-          <label for="username">Ім'я та прізвище *</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Наприклад: Назар Бондар"
-            autocomplete="name"
-            aria-describedby="usernameError"
-            aria-invalid="false"
-            required
-          >
-          <p id="usernameError" class="error-message" role="alert" hidden></p>
-        </div>
-
-        <!-- 2. Номер телефону -->
-        <div class="form-group">
-          <label for="phone">Номер телефону *</label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            placeholder="+380XXXXXXXXX"
-            autocomplete="tel"
-            aria-describedby="phoneError"
-            aria-invalid="false"
-            required
-          >
-          <p id="phoneError" class="error-message" role="alert" hidden></p>
-        </div>
-
-        <!-- 3. Електронна пошта -->
-        <div class="form-group">
-          <label for="email">Електронна пошта *</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="user@example.com"
-            autocomplete="email"
-            aria-describedby="emailError"
-            aria-invalid="false"
-            required
-          >
-          <p id="emailError" class="error-message" role="alert" hidden></p>
-        </div>
-
-        <!-- 4. Бренд та модель пристрою -->
-        <div class="form-group">
-          <label for="deviceModel">Бренд та модель пристрою *</label>
-          <input
-            type="text"
-            id="deviceModel"
-            name="deviceModel"
-            placeholder="Наприклад: Acer Nitro 5 або ASUS ROG"
-            aria-describedby="deviceModelError"
-            aria-invalid="false"
-            required
-          >
-          <p id="deviceModelError" class="error-message" role="alert" hidden></p>
-        </div>
-
-        <!-- 5. Тип пристрою (група радіокнопок) -->
-        <fieldset class="form-group form-group--full" aria-describedby="deviceTypeError">
-          <legend>Тип пристрою *</legend>
-
-          <div class="radio-group">
-            <div class="radio-item">
-              <input type="radio" id="device-laptop" name="deviceType" value="laptop" required>
-              <label for="device-laptop">Ноутбук</label>
+        <!-- Головний контейнер Swiper -->
+        <div class="swiper testimonials-swiper">
+          <div class="swiper-wrapper">
+            
+            <!-- Слайд 1 -->
+            <div class="swiper-slide">
+              <article class="testimonial-card">
+                <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="testimonial-text">"Відновили залитий макбук, хоча в іншому сервісі сказали міняти плату. Дуже дякую!"</p>
+                <strong class="testimonial-author">Олексій М.</strong>
+              </article>
             </div>
 
-            <div class="radio-item">
-              <input type="radio" id="device-pc" name="deviceType" value="pc">
-              <label for="device-pc">Стаціонарний ПК</label>
+            <!-- Слайд 2 -->
+            <div class="swiper-slide">
+              <article class="testimonial-card">
+                <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="testimonial-text">"Сподобався прозорий розрахунок. Ціна не змінилась після ремонту."</p>
+                <strong class="testimonial-author">Ірина В.</strong>
+              </article>
             </div>
 
-            <div class="radio-item">
-              <input type="radio" id="device-monitor" name="deviceType" value="monitor">
-              <label for="device-monitor">Монітор</label>
+            <!-- Слайд 3 -->
+            <div class="swiper-slide">
+              <article class="testimonial-card">
+                <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
+                <p class="testimonial-text">"Зробили швидко, але довелось почекати деталь з Європи. Проте сервіс на висоті."</p>
+                <strong class="testimonial-author">Максим С.</strong>
+              </article>
             </div>
 
-            <div class="radio-item">
-              <input type="radio" id="device-mobile" name="deviceType" value="mobile">
-              <label for="device-mobile">Телефон / Планшет</label>
+            <!-- Слайд 4 (доданий для плавної прокрутки слайдера) -->
+            <div class="swiper-slide">
+              <article class="testimonial-card">
+                <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="testimonial-text">"Почистили ігровий ноутбук і замінили термопрокладки. Температури впали майже на 20 градусів!"</p>
+                <strong class="testimonial-author">Дмитро К.</strong>
+              </article>
             </div>
 
-            <div class="radio-item">
-              <input type="radio" id="device-other" name="deviceType" value="other">
-              <label for="device-other">Інше</label>
+            <!-- Слайд 5 (доданий для плавної прокрутки слайдера) -->
+            <div class="swiper-slide">
+              <article class="testimonial-card">
+                <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="testimonial-text">"Здали монітор без зображення — за день перепаяли блок живлення. Рекомендую хлопців."</p>
+                <strong class="testimonial-author">Олена Т.</strong>
+              </article>
             </div>
+
           </div>
 
-          <p id="deviceTypeError" class="error-message" role="alert" hidden></p>
-        </fieldset>
-
-        <!-- 6. Опис поломки або симптомів -->
-        <div class="form-group form-group--full">
-          <label for="message">Опис поломки або симптомів *</label>
-          <textarea
-            id="message"
-            name="message"
-            rows="4"
-            placeholder="Опишіть, що саме трапилося з пристроєм (наприклад: не вмикається після пролиття рідини, сильно гріється тощо)..."
-            aria-describedby="messageError"
-            aria-invalid="false"
-            required
-          ></textarea>
-          <p id="messageError" class="error-message" role="alert" hidden></p>
+          <!-- Елементи керування Swiper -->
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev" aria-label="Попередній відгук"></div>
+          <div class="swiper-button-next" aria-label="Наступний відгук"></div>
         </div>
+      </div>
+    </section>
 
-        <!-- 7. Згода на обробку персональних даних -->
-        <div class="form-group form-group--full">
-          <div class="checkbox-item">
+    <!-- Форма запису на діагностику -->
+    <section id="booking" aria-labelledby="booking-heading">
+      <div class="container">
+        <header>
+          <h2 id="booking-heading">Записатись на діагностику</h2>
+          <p>Не знаєте точну причину несправності? Залиште заявку — майстер «Чіп &amp; Байт» проведе діагностику та зв’яжеться з вами.</p>
+        </header>
+
+        <form id="diagnosticForm" name="diagnosticForm" novalidate>
+          <!-- 1. Ім'я та прізвище -->
+          <div class="form-group">
+            <label for="username">Ім'я та прізвище *</label>
             <input
-              type="checkbox"
-              id="agreement"
-              name="agreement"
-              aria-describedby="agreementError"
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Наприклад: Назар Бондар"
+              autocomplete="name"
+              aria-describedby="usernameError"
               aria-invalid="false"
               required
             >
-            <label for="agreement">
-              Я погоджуюсь на обробку персональних даних відповідно до політики конфіденційності *
-            </label>
+            <p id="usernameError" class="error-message" role="alert" hidden></p>
           </div>
-          <p id="agreementError" class="error-message" role="alert" hidden></p>
-        </div>
 
-        <!-- Кнопка відправки -->
-        <div class="form-actions form-group--full">
-          <button type="submit" id="submitBtn">Записатись на діагностику</button>
-        </div>
-      </form>
-    </div>
-  </section>
+          <!-- 2. Номер телефону -->
+          <div class="form-group">
+            <label for="phone">Номер телефону *</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="+380XXXXXXXXX"
+              autocomplete="tel"
+              aria-describedby="phoneError"
+              aria-invalid="false"
+              required
+            >
+            <p id="phoneError" class="error-message" role="alert" hidden></p>
+          </div>
 
-  <!-- Модальне вікно успішної валідації -->
-  <div
-    id="successModal"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="modalTitle"
-    aria-describedby="modalDescription"
-    hidden
-  >
-    <div class="modal-content">
-      <h3 id="modalTitle">Заявку прийнято!</h3>
-      <p id="modalDescription">
-        Форма успішно пройшла клієнтську валідацію. Демонстрація успішного надсилання заявки до сервісного центру «Чіп &amp; Байт».
-      </p>
-      <button type="button" id="closeModalBtn">Закрити</button>
+          <!-- 3. Електронна пошта -->
+          <div class="form-group">
+            <label for="email">Електронна пошта *</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="user@example.com"
+              autocomplete="email"
+              aria-describedby="emailError"
+              aria-invalid="false"
+              required
+            >
+            <p id="emailError" class="error-message" role="alert" hidden></p>
+          </div>
+
+          <!-- 4. Бренд та модель пристрою -->
+          <div class="form-group">
+            <label for="deviceModel">Бренд та модель пристрою *</label>
+            <input
+              type="text"
+              id="deviceModel"
+              name="deviceModel"
+              placeholder="Наприклад: Acer Nitro 5 або ASUS ROG"
+              aria-describedby="deviceModelError"
+              aria-invalid="false"
+              required
+            >
+            <p id="deviceModelError" class="error-message" role="alert" hidden></p>
+          </div>
+
+          <!-- 5. Тип пристрою (група радіокнопок) -->
+          <fieldset class="form-group form-group--full" aria-describedby="deviceTypeError">
+            <legend>Тип пристрою *</legend>
+
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="device-laptop" name="deviceType" value="laptop" required>
+                <label for="device-laptop">Ноутбук</label>
+              </div>
+
+              <div class="radio-item">
+                <input type="radio" id="device-pc" name="deviceType" value="pc">
+                <label for="device-pc">Стаціонарний ПК</label>
+              </div>
+
+              <div class="radio-item">
+                <input type="radio" id="device-monitor" name="deviceType" value="monitor">
+                <label for="device-monitor">Монітор</label>
+              </div>
+
+              <div class="radio-item">
+                <input type="radio" id="device-mobile" name="deviceType" value="mobile">
+                <label for="device-mobile">Телефон / Планшет</label>
+              </div>
+
+              <div class="radio-item">
+                <input type="radio" id="device-other" name="deviceType" value="other">
+                <label for="device-other">Інше</label>
+              </div>
+            </div>
+
+            <p id="deviceTypeError" class="error-message" role="alert" hidden></p>
+          </fieldset>
+
+          <!-- 6. Опис поломки або симптомів -->
+          <div class="form-group form-group--full">
+            <label for="message">Опис поломки або симптомів *</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              placeholder="Опишіть, що саме трапилося з пристроєм (наприклад: не вмикається після пролиття рідини, сильно гріється тощо)..."
+              aria-describedby="messageError"
+              aria-invalid="false"
+              required
+            ></textarea>
+            <p id="messageError" class="error-message" role="alert" hidden></p>
+          </div>
+
+          <!-- 7. Згода на обробку персональних даних -->
+          <div class="form-group form-group--full">
+            <div class="checkbox-item">
+              <input
+                type="checkbox"
+                id="agreement"
+                name="agreement"
+                aria-describedby="agreementError"
+                aria-invalid="false"
+                required
+              >
+              <label for="agreement">
+                Я погоджуюсь на обробку персональних даних відповідно до політики конфіденційності *
+              </label>
+            </div>
+            <p id="agreementError" class="error-message" role="alert" hidden></p>
+          </div>
+
+          <!-- Кнопка відправки -->
+          <div class="form-actions form-group--full">
+            <button type="submit" id="submitBtn">Записатись на діагностику</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Модальне вікно успішної валідації -->
+    <div
+      id="successModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTitle"
+      aria-describedby="modalDescription"
+      hidden
+    >
+      <div class="modal-content">
+        <h3 id="modalTitle">Заявку прийнято!</h3>
+        <p id="modalDescription">
+          Форма успішно пройшла клієнтську валідацію. Демонстрація успішного надсилання заявки до сервісного центру «Чіп &amp; Байт».
+        </p>
+        <button type="button" id="closeModalBtn">Закрити</button>
+      </div>
     </div>
-  </div>
 
   </main>
 
@@ -339,8 +475,8 @@
       <nav class="footer-col" aria-label="Додаткова інформація">
         <strong class="col-title">Інформація</strong>
         <ul class="footer-links">
-          <li><a href="#faq">Для бізнесу</a></li>
-          <li><a href="#contacts">Контакти</a></li>
+          <li><a href="#cases">Наші роботи</a></li>
+          <li><a href="#testimonials">Відгуки</a></li>
         </ul>
       </nav>
     </div>
